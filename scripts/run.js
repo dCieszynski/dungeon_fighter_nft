@@ -4,7 +4,7 @@ const main = async () => {
   );
   const dungeonFighterContract = await dungeonFighterFactory.deploy();
   await dungeonFighterContract.deployed();
-  console.log("Contract deployed to: ", nftGameContract.address);
+  console.log("Contract deployed to: ", dungeonFighterContract.address);
 };
 
 const runMain = async () => {
