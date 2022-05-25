@@ -109,4 +109,57 @@ contract DungeonFighter is ERC721 {
 
         _tokenIds.increment();
     }
+
+    function tokenURI(uint256 _tokenId)
+        public
+        view
+        override
+        returns (string memory)
+    {
+        CharacterAttributes memory charAttributes = nftHolderAttributes[
+            _tokenId
+        ];
+
+        string memory strLvl = Strings.toString(charAttributes.lvl);
+        string memory strHp = Strings.toString(charAttributes.hp);
+        string memory strMaxHp = Strings.toString(charAttributes.maxHp);
+        string memory strAttack = Strings.toString(charAttributes.attack);
+        string memory strAgility = Strings.toString(charAttributes.agility);
+        string memory strMagic = Strings.toString(charAttributes.magic);
+        string memory strCritChance = Strings.toString(
+            charAttributes.critChance
+        );
+
+        string memory json = Base64.encode(
+            abi.encodePacked(
+                '{"name": "',
+                charAttributes.name,
+                " -- NFT #: ",
+                Strings.toString(_tokenId),
+                '", "description": "Dungeon Fighter NFT", "image": "',
+                charAttributes.imgURI,
+                '", "attributes": [ { "trait_type": "Health Points", "value": ',
+                strHp,
+                ', "max_value":',
+                strMaxHp,
+                '}, { "trait_type": "Level", "value": ',
+                strLvl,
+                '}, {"trait_type": "Attack", "value": ',
+                strAttack,
+                '}, {"trait_type": "Agility", "value": ',
+                strAgility,
+                '}, {"trait_type": "Magic", "value": ',
+                strMagic,
+                '}, {"trait_type": "CritChance", "value": ',
+                strCritChance,
+                "} ]}"
+            )
+        );
+
+        string memory output = string(
+            abi.encodePacked("data:application/json;base64,", json)
+        );
+
+        return output;
+    }
 }

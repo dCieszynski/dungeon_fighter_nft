@@ -18,6 +18,12 @@ const main = async () => {
   );
   await dungeonFighterContract.deployed();
   console.log("Contract deployed to: ", dungeonFighterContract.address);
+
+  let txn = await dungeonFighterContract.mintCharacterNFT(1);
+  await txn.wait();
+
+  let returnedTokenURI = await dungeonFighterContract.tokenURI(1);
+  console.log("Token URI: ", returnedTokenURI);
 };
 
 const runMain = async () => {
