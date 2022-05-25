@@ -75,4 +75,38 @@ contract DungeonFighter is ERC721 {
         }
         _tokenIds.increment();
     }
+
+    //Mint Character
+    function mintCharacterNFT(uint256 _characterId) external {
+        //Get curennt tokenId
+        uint256 newItemId = _tokenIds.current();
+
+        //Assigns the tokenId to the caller's wallet address.
+        _safeMint(msg.sender, newItemId);
+
+        //Store NFT data per player
+        nftHolderAttributes[newItemId] = CharacterAttributes({
+            characterId: _characterId,
+            name: defaultCharacters[_characterId].name,
+            imgURI: defaultCharacters[_characterId].imgURI,
+            lvl: defaultCharacters[_characterId].lvl,
+            hp: defaultCharacters[_characterId].hp,
+            maxHp: defaultCharacters[_characterId].maxHp,
+            attack: defaultCharacters[_characterId].attack,
+            agility: defaultCharacters[_characterId].agility,
+            magic: defaultCharacters[_characterId].magic,
+            critChance: defaultCharacters[_characterId].critChance
+        });
+
+        console.log(
+            "Minted NFT w/ tokenId %s and characterIndex %s",
+            newItemId,
+            _characterId
+        );
+
+        //Store who owns NFT
+        nftHolders[msg.sender] = newItemId;
+
+        _tokenIds.increment();
+    }
 }
