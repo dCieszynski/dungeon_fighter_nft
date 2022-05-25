@@ -110,6 +110,7 @@ contract DungeonFighter is ERC721 {
         _tokenIds.increment();
     }
 
+    //Getting token data
     function tokenURI(uint256 _tokenId)
         public
         view
