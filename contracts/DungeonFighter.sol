@@ -12,6 +12,19 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract DungeonFighter is ERC721 {
+    struct CharacterAttributes {
+        uint256 characterId;
+        string name;
+        string imgURI;
+        uint256 lvl;
+        uint256 hp;
+        uint256 maxHp;
+        uint256 attack;
+        uint256 agility;
+        uint256 magic;
+        uint256 critChance;
+    }
+
     constructor() ERC721("DungeonFighters", "DF") {
         console.log("Contract initialized");
     }
