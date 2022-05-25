@@ -3,7 +3,7 @@ pragma solidity ^0.8.1;
 
 import "hardhat/console.sol";
 
-// Helper we wrote to encode in Base64
+// Helper encode in Base64
 import "./libraries/Base64.sol";
 
 //OpenZeppelin ERC721 standard smart contract
