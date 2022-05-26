@@ -170,4 +170,12 @@ contract DungeonFighter is ERC721 {
 
         return output;
     }
+
+    function getAllDefaultCharacters()
+        public
+        view
+        returns (CharacterAttributes[] memory)
+    {
+        return defaultCharacters;
+    }
 }

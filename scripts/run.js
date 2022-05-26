@@ -19,6 +19,10 @@ const main = async () => {
   await dungeonFighterContract.deployed();
   console.log("Contract deployed to: ", dungeonFighterContract.address);
 
+  let defaultCharacters =
+    await dungeonFighterContract.getAllDefaultCharacters();
+  console.log("All characters: ", defaultCharacters);
+
   let txn = await dungeonFighterContract.mintCharacterNFT(1);
   await txn.wait();
 
