@@ -82,6 +82,7 @@ contract DungeonFighter is ERC721 {
         _tokenIds.increment();
     }
 
+    //Check if user has nft, if has return nft struct, else retrun empty nft struct
     function checkIfUserHasNFT()
         public
         view
