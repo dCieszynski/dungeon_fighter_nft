@@ -33,7 +33,7 @@ contract DungeonFighter is ERC721 {
     CharacterAttributes[] defaultCharacters;
 
     //Stores state of player's NFT
-    mapping(uint256 => CharacterAttributes) nftHolderAttributes;
+    mapping(uint256 => CharacterAttributes) nftHoldersAttributes;
 
     //Stores the owner of the NFT
     mapping(address => uint256) nftHolders;
@@ -82,6 +82,21 @@ contract DungeonFighter is ERC721 {
         _tokenIds.increment();
     }
 
+    function checkIfUserHasNFT()
+        public
+        view
+        returns (CharacterAttributes memory)
+    {
+        uint256 userNftTokenId = nftHolders[msg.sender];
+
+        if (userNftTokenId > 0) {
+            return nftHoldersAttributes[userNftTokenId];
+        } else {
+            CharacterAttributes memory emptyStruct;
+            return emptyStruct;
+        }
+    }
+
     //Mint Character
     function mintCharacterNFT(uint256 _characterId) external {
         //Get curennt tokenId
@@ -91,7 +106,7 @@ contract DungeonFighter is ERC721 {
         _safeMint(msg.sender, newItemId);
 
         //Store NFT data per player
-        nftHolderAttributes[newItemId] = CharacterAttributes({
+        nftHoldersAttributes[newItemId] = CharacterAttributes({
             characterId: _characterId,
             name: defaultCharacters[_characterId].name,
             imgURI: defaultCharacters[_characterId].imgURI,
@@ -124,7 +139,7 @@ contract DungeonFighter is ERC721 {
         override
         returns (string memory)
     {
-        CharacterAttributes memory charAttributes = nftHolderAttributes[
+        CharacterAttributes memory charAttributes = nftHoldersAttributes[
             _tokenId
         ];
 
