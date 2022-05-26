@@ -171,6 +171,7 @@ contract DungeonFighter is ERC721 {
         return output;
     }
 
+    //Get all default NFT characters
     function getAllDefaultCharacters()
         public
         view
