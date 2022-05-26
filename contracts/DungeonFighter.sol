@@ -38,6 +38,12 @@ contract DungeonFighter is ERC721 {
     //Stores the owner of the NFT
     mapping(address => uint256) nftHolders;
 
+    event CharacterNFTMinted(
+        address sender,
+        uint256 tokenId,
+        uint256 characterIndex
+    );
+
     constructor(
         string[] memory charactersNames,
         string[] memory charactersImagesURIs,
@@ -108,6 +114,7 @@ contract DungeonFighter is ERC721 {
         nftHolders[msg.sender] = newItemId;
 
         _tokenIds.increment();
+        emit CharacterNFTMinted(msg.sender, newItemId, _characterId);
     }
 
     //Getting token data
